@@ -6,3 +6,9 @@
     color: white;
     background-color: /*[[${backgroundColor}]]*/ pink;
 }
+
+button[type=button] {
+    padding: 2em;
+    margin: 1em;
+    color: orange;
+}

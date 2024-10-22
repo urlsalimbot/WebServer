@@ -27,6 +27,7 @@ public class WebAppConfig {
             config.jetty.modifyServletContextHandler(handler -> handler.setSessionHandler(sqlSessionHandler(dbdriver,dburl2)));
             config.staticFiles.add("/public", Location.CLASSPATH);
             config.fileRenderer(new JavalinThymeleaf());
+            
             //config.spaRoot.addFile("/", "src/main/resources/public/index.html", Location.EXTERNAL);
             });
 
@@ -39,7 +40,7 @@ public class WebAppConfig {
 
     private static final Handler TEST = (ctx) -> {
         Map<String, Object> model = new HashMap<>();
-        model.put("hello", "Hello, World.");
+        model.put("hello", "Hello, World. :)");
         ctx.render("test.html", model);
     };
 }
