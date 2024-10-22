@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login Screen</title>
+    <link rel="stylesheet" href="css/LoginPage-style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="container">
+      <form class="login-form">
+        <h2>Login</h2>
+        <div class="input-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" placeholder="Type your username" />
+        </div>
+        <div class="input-group" style="position: relative;">
+          <label for="password">Password:</label>
+          <input type="password" id="password" placeholder="Type your password" />
+          <span class="show-password" onclick="togglePassword()">&#128065;</span>
+        </div>
+        <div class="forgot-password">
+          <a href="#">Forgot password?</a>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        <div class="signup-link">
+          Don't have an account? <a href="#">Sign up</a>
+        </div>
+      </form>
+    </div>
+    <script>
+      function togglePassword() {
+        var passwordField = document.getElementById("password");
+        var showPasswordIcon = document.querySelector(".show-password");
+        if (passwordField.type === "password") {
+          passwordField.type = "text";
+          showPasswordIcon.innerHTML = "&#128064;"; 
+        } else {
+          passwordField.type = "password";
+          showPasswordIcon.innerHTML = "&#128065;"; 
+        }
+      }
+    </script>
+  </body>
+</html>
