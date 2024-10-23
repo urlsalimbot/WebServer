@@ -1,16 +1,14 @@
 package com.WebAppTest;
 
-import com.WebAppTest.Utils.DatabaseUtil;
-import io.javalin.Javalin;
-import io.javalin.http.staticfiles.Location;
-    import com.WebAppTest.Config.WebAppConfig;
+import com.WebAppTest.config.WebAppConfig;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class WebAppMain {
     public static void main(String[] args) {
-        WebAppConfig.mainSetup().start(7070);
-
+//          System.out.println(PropertiesUtil.getConfig());
+//          System.out.println(DatabaseUtil.getDataSource());
+          WebAppConfig.mainSetup().start();
 
 //                Javalin.create(config -> {
 //            config.staticFiles.add("src/main/resources/public", Location.EXTERNAL);
