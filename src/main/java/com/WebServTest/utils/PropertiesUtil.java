@@ -1,4 +1,4 @@
-package com.WebAppTest.utils;
+package com.WebServTest.utils;
 
 
 import org.slf4j.Logger;

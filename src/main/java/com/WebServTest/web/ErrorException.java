@@ -1,4 +1,4 @@
-package com.WebAppTest.web;
+package com.WebServTest.web;
 
 public class ErrorException {
 }

@@ -1,8 +1,7 @@
-package com.WebAppTest.utils;
+package com.WebServTest.utils;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.postgresql.util.ExpressionProperties;
 
 import java.util.Properties;
 import javax.sql.DataSource;
