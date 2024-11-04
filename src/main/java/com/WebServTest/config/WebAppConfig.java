@@ -34,7 +34,7 @@ public class WebAppConfig {
 
          Javalin app = Javalin.create( config -> {
              config.jetty.defaultPort = serverport;
-             config.staticFiles.enableWebjars();
+//             config.staticFiles.enableWebjars();
              config.staticFiles.add("/public", Location.CLASSPATH);
              config.bundledPlugins.enableCors(corsPluginConfig -> {
                  corsPluginConfig.addRule(CorsPluginConfig.CorsRule::anyHost);

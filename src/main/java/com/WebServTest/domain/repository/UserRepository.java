@@ -1,4 +1,6 @@
-package com.WebServTest.service.user;
+package com.WebServTest.domain.repository;
+
+import com.WebServTest.domain.User;
 
 import java.util.List;
 import java.util.Optional;

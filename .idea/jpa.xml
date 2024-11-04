@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig" migrateDefaultValues="false" reUseTableSchema="true">
+    <option name="migrateDefaultValues" value="false" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/com/WebServTest/domain" />
+    <option name="reverseEngineeringLastDbConnectionId" value="177576be-76ae-4568-8f92-911a97b7209d" />
+  </component>
+</project>
