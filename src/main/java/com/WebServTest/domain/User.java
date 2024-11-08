@@ -2,6 +2,8 @@ package com.WebServTest.domain;
 
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,20 +11,20 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "employee")
-public final class User {
+public class User implements Serializable {
     private Integer empID;
-    private String fName;
     private String lName;
-    private String job;
-    private String manager;
-    private String hiredate;
+    private String fName;
     private String email;
     private String phone;
+    private String job;
+    private String manager;
+    private Date hiredate;
     private Date createdAt;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "empid", nullable = false)
     public Integer getEmpID() {
         return empID;
     }
@@ -76,12 +78,12 @@ public final class User {
         this.manager = manager;
     }
 
-    @Column(name = "phone")
-    public String getHiredate() {
+    @Column(name = "hiredate")
+    public Date getHiredate() {
         return hiredate;
     }
 
-    public void setHiredate(String hiredate) {
+    public void setHiredate(Date hiredate) {
         this.hiredate = hiredate;
     }
 
@@ -101,5 +103,11 @@ public final class User {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public static User newUser(String name){
+        var user = new User();
+        user.setfName(name);
+        return user;
     }
 }

@@ -1,17 +1,21 @@
 package com.WebServTest.config;
 
 
-import com.WebServTest.utils.PropertiesUtil;
+import com.WebServTest.security.RoleUser;
+import com.WebServTest.web.handler.UserHandler;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 
 import java.sql.Connection;
 import java.util.Properties;
 
-import com.WebServTest.utils.DatabaseUtil;
 import io.javalin.plugin.bundled.CorsPluginConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static io.javalin.apibuilder.ApiBuilder.path;
+import static io.javalin.apibuilder.ApiBuilder.get;
+import static io.javalin.apibuilder.ApiBuilder.post;
 
 public class WebAppConfig {
     private static final Logger logger = LoggerFactory.getLogger(WebAppConfig.class);
@@ -35,10 +39,17 @@ public class WebAppConfig {
          Javalin app = Javalin.create( config -> {
              config.jetty.defaultPort = serverport;
 //             config.staticFiles.enableWebjars();
-             config.staticFiles.add("/public", Location.CLASSPATH);
+             config.staticFiles.add("/static", Location.CLASSPATH);
+             config.spaRoot.addFile("/","/static/index.html");
              config.bundledPlugins.enableCors(corsPluginConfig -> {
                  corsPluginConfig.addRule(CorsPluginConfig.CorsRule::anyHost);
              });
+             config.router.apiBuilder(() -> {
+                 path("/user", () -> {
+                     get(UserHandler.listAll);
+                     post(UserHandler.save);
+                 });
+                                      });
             //config.spaRoot.addFile("/", "src/main/resources/public/index.html", Location.EXTERNAL);
             });
 

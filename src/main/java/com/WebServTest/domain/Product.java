@@ -2,11 +2,12 @@ package com.WebServTest.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "product", schema = "public")
-public class Product {
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_gen")
     @SequenceGenerator(name = "product_id_gen", sequenceName = "product_productid_seq", allocationSize = 1)

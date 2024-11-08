@@ -4,7 +4,6 @@
 ### Back-End
 - [x] **Java** as programming language
 - [x] **Javalin** as webserver framework
-- [x] **Google Guice** as dependency injection framework
 - [x] **Jackson** as data bind serialization/deserialization
 - [x] **Java-JWT** as JWT spec implementation
 - [x] **HikariCP** as datasource to abstract driver implementation

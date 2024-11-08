@@ -2,9 +2,11 @@ package com.WebServTest.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "customer")
-public class Customer {
+public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_gen")
     @SequenceGenerator(name = "customer_id_gen", sequenceName = "customer_customerid_seq", allocationSize = 1)
