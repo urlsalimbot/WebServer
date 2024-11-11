@@ -1,0 +1,7 @@
+.productsContainer {
+  height: 100vh;
+  width: 800px;
+
+  border: 2px solid white;
+  background-color: bisque;
+}

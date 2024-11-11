@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.container sub {
+  position: relative;
+}
+
+.topDiv {
+  background-color: #fe6d01;
+  height: 23%;
+  min-height: 170px;
+  max-height: 180px;
+}
+
+.midDiv {
+  height: 17%;
+  background-color: white;
+  min-height: 120px;
+  max-height: 150px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.botDiv {
+  height: 60%;
+  background-color: #f40290;
+  padding-top: 3px;
+  display: flex;
+}
+
+.marginDiv {
+  height: 100%;
+  width: 45%;
+  min-width: 500px;
+}
+
+.dunkinImg {
+  height: 110px;
+  width: auto;
+}
+
+.dunkinLogo {
+  display: block;
+}
+
+.donutsImg {
+  height: 110px;
+  width: auto;
+}
+
+.donutsLogo {
+  display: block;
+}
+
+.adminBtnDiv {
+  position: absolute;
+  border-radius: 6px;
+  background-color: #fe6d01;
+  width: 150px;
+  font-size: 30px;
+  bottom: 3%;
+  right: 2%;
+}
+
+.adminBtnDiv:hover {
+  background-color: #ae6d01;
+}
+
+.adminBtn {
+  width: 100%;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  padding: 15px;
+  display: inline-block;
+  font-weight: bolder;
+}

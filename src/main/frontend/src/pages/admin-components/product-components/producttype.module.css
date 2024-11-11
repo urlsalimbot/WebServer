@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&display=swap");
+
+.typeDiv {
+  display: block;
+  position: relative;
+  width: 100%;
+  font-size: 30px;
+  border: 1px solid rgb(1, 1, 1, 0.5);
+}
+
+.typeBtn {
+  font-family: "Caprasimo", serif;
+  font-size: 24px;
+  width: 100%;
+  color: white;
+  background-color: #f40290;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  display: inline-block;
+  border: none;
+}
+
+.typeBtn:hover {
+  background-color: brown;
+}

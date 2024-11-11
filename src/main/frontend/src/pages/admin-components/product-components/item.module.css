@@ -1,0 +1,89 @@
+.itemContainer {
+  width: 200px;
+  height: 290px;
+  background-color: #fe6d01;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  box-shadow: 2px 5px rgb(0, 0, 0, 0.2);
+}
+
+.itemContainer > div {
+  border-radius: 10px;
+  width: 90%;
+  overflow: hidden;
+  margin: 5px auto;
+  flex: 1 1 auto;
+}
+
+.imgContainer {
+  height: 150px;
+}
+
+.nameContainer {
+  background-color: aliceblue;
+  height: 30px;
+}
+
+.priceContainer {
+  background-color: aliceblue;
+  height: 30px;
+}
+
+.btnsContainer {
+  height: 30px;
+  display: flex;
+}
+
+.qtyBtnsContainer {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.qtyItem {
+  width: 100%;
+  flex: 1;
+  background-color: whitesmoke;
+}
+
+.btnsContainer div {
+  width: 50%;
+  background-color: transparent;
+}
+
+.qty {
+  border: 2px solid #999;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.selectBtn {
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  background-color: #36b332;
+  color: white;
+  padding: 5px;
+}
+
+.btnsContainer button {
+  border: 2px solid #999;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.decrementBtn {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.incrementBtn {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
