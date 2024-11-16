@@ -1,12 +1,14 @@
 package com.DDPointofSale.Infrastructure;
 
 
-import com.DDPointofSale.domain.category.Category;
-import com.DDPointofSale.domain.customer.Customer;
-import com.DDPointofSale.domain.product.Product;
-import com.DDPointofSale.domain.sales.Sale;
-import com.DDPointofSale.domain.transaction.Transaction;
-import com.DDPointofSale.domain.user.User;
+import com.DDPointofSale.domain.dao.Category;
+import com.DDPointofSale.domain.dao.Customer;
+import com.DDPointofSale.domain.dao.Product;
+import com.DDPointofSale.domain.dao.Sale;
+import com.DDPointofSale.domain.dao.Transaction;
+import com.DDPointofSale.domain.dao.User;
+import com.DDPointofSale.security.userauth.UserAuth;
+import org.eclipse.jetty.server.Authentication;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.schema.Action;
@@ -26,6 +28,8 @@ class AppHibernateConfig {
         settings.put(AvailableSettings.JAKARTA_JDBC_USER, "postgres");
         settings.put(AvailableSettings.JAKARTA_JDBC_PASSWORD, "123");
         settings.put(AvailableSettings.HIGHLIGHT_SQL, true);
+//        settings.put(AvailableSettings.SHOW_SQL, true);
+//        settings.put(AvailableSettings.FORMAT_SQL, true);
         settings.put(AvailableSettings.HBM2DDL_AUTO, Action.UPDATE);
 
         configuration.setProperties(settings);
@@ -35,6 +39,8 @@ class AppHibernateConfig {
         configuration.addAnnotatedClass(Sale.class);
         configuration.addAnnotatedClass(Transaction.class);
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(UserAuth.class);
+        configuration.addAnnotatedClass(Authentication.class);
 
         return configuration;
     }

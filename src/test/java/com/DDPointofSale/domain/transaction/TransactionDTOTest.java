@@ -1,17 +1,14 @@
 package com.DDPointofSale.domain.transaction;
 
-import com.DDPointofSale.domain.sales.Sale;
+import com.DDPointofSale.domain.dto.SaleDTO;
+import com.DDPointofSale.domain.dto.TransactionDTO;
+import com.DDPointofSale.domain.dao.Sale;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.JsonNodeDeserializer;
-import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 class TransactionDTOTest {
@@ -20,14 +17,11 @@ class TransactionDTOTest {
     public static void DTOtesting() throws JsonProcessingException {
         TransactionDTO transactionDTO = new TransactionDTO();
 
-        Sale sale1 = new Sale();
-        Sale sale2 = new Sale();
-        Sale sale3 = new Sale();
-        sale1.setId(1);
-        sale2.setId(2);
-        sale3.setId(3);
+        var sale1 = new SaleDTO();
+        var sale2 = new SaleDTO();
+        var sale3 = new SaleDTO();
 
-        List<Sale> sales = new ArrayList<>();
+        List<SaleDTO> sales = new ArrayList<>();
         sales.add(sale1);
         sales.add(sale2);
         sales.add(sale3);
