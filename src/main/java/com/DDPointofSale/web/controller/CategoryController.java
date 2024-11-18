@@ -24,19 +24,24 @@ public class CategoryController implements CrudHandler {
      */
     @Override
     public void create(@NotNull Context context) {
-        BodyValidator<Category> validator = context.bodyValidator(Category.class)
-                .check(it -> it.getCatename() != null, "Category must have name")
-                .check(it -> it.getCatedesc() != null, "Category must have description");
-        if (validator.errors().isEmpty()) {
-            try {
-                categoryService.addCategory(validator.get());
-                context.json(Map.of("status", "success")).status(201);
-            } catch (Exception e) {
-                context.json(Map.of("error", e,
-                        "Category", "Does not Exist")).status(500);
+        try {   
+            BodyValidator<Category> validator = context.bodyValidator(Category.class)
+                    .check(it -> it.getCatename() != null, "Category must have name")
+                    .check(it -> it.getCatedesc() != null, "Category must have description");
+            if (validator.errors().isEmpty()) {
+                try {
+                    categoryService.addCategory(validator.get());
+                    context.json(Map.of("status", "success")).status(201);
+                } catch (Exception e) {
+                    context.json(Map.of("error", e,
+                            "Category", "Does not Exist")).status(500);
+                }
+            } else {
+                context.status(422).json(validator.errors());
             }
-        } else {
-            context.status(422).json(validator.errors());
+
+        } catch (Exception e) {
+            context.status(422).json(Map.of("error", e.getMessage()));
         }
 
     }
@@ -84,23 +89,27 @@ public class CategoryController implements CrudHandler {
      */
     @Override
     public void update(@NotNull Context context, @NotNull String s) {
-        BodyValidator<Category> validator = context.bodyValidator(Category.class)
-                .check(it -> it.getCatedesc() != null, "user must have first name")
-                .check(it -> it.getCatename() != null, "user must have last name");
-        if (validator.errors().isEmpty()) {
-            try {
-                var res = categoryService.updateCategory(validator.get(), s);
-                if (res != null) {
-                    context.json(res).status(201);
-                } else {
-                    context.json(Map.of("status", "error")).status(500);
+        try {
+            BodyValidator<Category> validator = context.bodyValidator(Category.class)
+                    .check(it -> it.getCatedesc() != null, "user must have first name")
+                    .check(it -> it.getCatename() != null, "user must have last name");
+            if (validator.errors().isEmpty()) {
+                try {
+                    var res = categoryService.updateCategory(validator.get(), s);
+                    if (res != null) {
+                        context.json(res).status(201);
+                    } else {
+                        context.json(Map.of("status", "error")).status(500);
+                    }
+                } catch (Exception e) {
+                    context.json(Map.of("error", e,
+                            "Category", "Does not Exist")).status(500);
                 }
-            } catch (Exception e) {
-                context.json(Map.of("error", e,
-                        "Category", "Does not Exist")).status(500);
+            } else {
+                context.json(validator.errors()).status(422);
             }
-        } else {
-            context.json(validator.errors()).status(422);
+        } catch (Exception e) {
+            context.status(422).json(Map.of("error", e.getMessage()));
         }
     }
 

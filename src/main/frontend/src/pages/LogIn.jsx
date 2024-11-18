@@ -27,11 +27,11 @@ export default function LogIn() {
 
       <LoginForm />
 
-      <div className={styles.adminBtnDiv}>
+      {/* <div className={styles.adminBtnDiv}>
         <Link className={styles.adminBtn} to="/admin">
           Admin
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }

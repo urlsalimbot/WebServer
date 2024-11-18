@@ -37,25 +37,20 @@ public class AppConfig {
         serverport = Integer.valueOf(prop.getProperty("server.port"));
     }
 
-    static SslPlugin plugin = new SslPlugin(conf -> {
-        conf.pemFromClasspath("certs/cert.pem", "certs/key.pem");
-        conf.insecure = false;
-//        conf.insecurePort = serverport;
-        conf.secure = true;
-        conf.securePort = serverport;
-        conf.sniHostCheck = true;
-        conf.http2 = true;
-        // additional configuration options
-    });
-
     public static Javalin mainSetup() {
         Javalin app = Javalin.create(config -> {
-            config.registerPlugin(plugin);
+//            config.registerPlugin(plugin);
             config.bundledPlugins.enableSslRedirects();
             config.staticFiles.add("/static", Location.CLASSPATH);
-            config.bundledPlugins.enableCors(corsPluginConfig -> {
-                corsPluginConfig.addRule(CorsPluginConfig.CorsRule::anyHost);
+            config.bundledPlugins.enableCors(corsRule -> {
+                corsRule.addRule(it -> {
+                    it.reflectClientOrigin = true;
+                    it.allowCredentials = true;
+                    it.exposeHeader("Access-Control-Allow-Origin");
+                        }
+                );
             });
+
             config.router.apiBuilder(() -> {
 
                 path("/app", () -> {
@@ -73,6 +68,9 @@ public class AppConfig {
                     path("/transaction", () -> {
                         get("/",
                                 ctx -> injector.getInstance(TransactionController.class).getAllTransac(ctx),
+                                ADMIN);
+                        get("/sales",
+                                ctx -> injector.getInstance(TransactionController.class).getMoneyline(ctx),
                                 ADMIN);
                         post("/",
                                 ctx -> injector.getInstance(TransactionController.class).saveTransac(ctx),
@@ -110,8 +108,10 @@ public class AppConfig {
                 ctx -> injector.getInstance(AuthenticationController.class).login(ctx));
         app.post("/register",
                 ctx -> injector.getInstance(AuthenticationController.class).register(ctx));
+
         app.beforeMatched("app/*", AuthHandler.accessManager);
 
+//        app.after(AuthHandler::append);
         return app;
 
     }

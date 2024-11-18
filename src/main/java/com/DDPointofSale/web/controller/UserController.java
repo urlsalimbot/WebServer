@@ -25,22 +25,26 @@ public class UserController implements CrudHandler {
      */
     @Override
     public void create(@NotNull Context context) {
-        BodyValidator<User> validator = context.bodyValidator(User.class)
-                .check(it -> it.getFName() != null, "user must have first name")
-                .check(it -> it.getLName() != null, "user must have last name")
-                .check(it -> it.getJob() != null, "user must have job");
-        if (validator.errors().isEmpty()) {
-            try {
-                var res = userServ.addUser(validator.get());
-                context.json(res).status(201);
-            } catch (Exception e) {
-                context.json(Map.of("error", e,
-                        "User", "Does not Exist")).status(500);
+        try {
+            BodyValidator<User> validator = context.bodyValidator(User.class)
+                    .check(it -> it.getFName() != null, "user must have first name")
+                    .check(it -> it.getLName() != null, "user must have last name")
+                    .check(it -> it.getJob() != null, "user must have job");
+            if (validator.errors().isEmpty()) {
+                try {
+                    var res = userServ.addUser(validator.get());
+                    context.json(res).status(201);
+                } catch (Exception e) {
+                    context.json(Map.of("error", e,
+                            "User", "Does not Exist")).status(500);
+                }
+            } else {
+                context.status(422).json(validator.errors());
             }
-        } else {
-            context.status(422).json(validator.errors());
-        }
 
+        }catch (Exception e) {
+            context.status(422).json(Map.of("error", e.getMessage()));
+        }
     }
 
     /**
@@ -101,27 +105,31 @@ public class UserController implements CrudHandler {
      */
     @Override
     public void update(@NotNull Context context, @NotNull String s) {
-        BodyValidator<User> validator = context.bodyValidator(User.class)
-                .check(it -> it.getFName() != null, "user must have first name")
-                .check(it -> it.getLName() != null, "user must have last name")
-                .check(it -> it.getJob() != null, "user must have job")
-                .check(it -> it.getEmail() != null, "user must have email")
-                .check(it -> it.getPhone() != null, "user must have job")
-                .check(it -> it.getHiredate() != null, "user must have hiredate");
-        if (validator.errors().isEmpty()) {
-            try {
-                var res = userServ.update(validator.get(), s);
-                if (res != null) {
-                    context.json(res).status(201);
-                } else {
-                    context.json(Map.of("status", "error")).status(500);
+        try {
+            BodyValidator<User> validator = context.bodyValidator(User.class)
+                    .check(it -> it.getFName() != null, "user must have first name")
+                    .check(it -> it.getLName() != null, "user must have last name")
+                    .check(it -> it.getJob() != null, "user must have job")
+                    .check(it -> it.getEmail() != null, "user must have email")
+                    .check(it -> it.getPhone() != null, "user must have job")
+                    .check(it -> it.getHiredate() != null, "user must have hiredate");
+            if (validator.errors().isEmpty()) {
+                try {
+                    var res = userServ.update(validator.get(), s);
+                    if (res != null) {
+                        context.json(res).status(201);
+                    } else {
+                        context.json(Map.of("status", "error")).status(500);
+                    }
+                } catch (Exception e) {
+                    context.json(Map.of("error", e,
+                            "User", "Does not Exist")).status(500);
                 }
-            } catch (Exception e) {
-                context.json(Map.of("error", e,
-                        "User", "Does not Exist")).status(500);
+            } else {
+                context.json(validator.errors()).status(422);
             }
-        } else {
-            context.json(validator.errors()).status(422);
+        }catch (Exception e) {
+            context.json(Map.of("error", e.getMessage())).status(422);
         }
     }
 

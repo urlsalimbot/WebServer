@@ -32,10 +32,6 @@ public class Customer implements Serializable {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Sale> sales;
-
     @OneToOne()
     @JsonIgnore
     private Transaction transaction;

@@ -2,12 +2,11 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 250px 250px 250px;
-  grid-template-rows: 290px;
-  grid-row-gap: 20px;
-  overflow: scroll;
-  margin: 0 auto;
-  padding-top: 20px;
+  grid-template-columns: 190px 190px 190px 190px 190px 190px;
+  grid-template-rows: 190px;
+  grid-row-gap: 10px;
+  margin: 20px auto;
+  margin-bottom: 20px;
 }
 
 .prodContainer div {

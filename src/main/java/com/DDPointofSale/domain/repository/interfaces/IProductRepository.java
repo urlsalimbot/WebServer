@@ -18,5 +18,7 @@ public interface IProductRepository
 
     public Optional<Product> updateProduct(Product product, String name);
 
+    public Optional<Product> updatebyID(Product product, Integer id);
+
     public void delete(String name);
 }

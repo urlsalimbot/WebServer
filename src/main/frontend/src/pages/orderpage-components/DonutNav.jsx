@@ -4,7 +4,7 @@ import pinkDonut from "./assets/pinkDonut.png";
 import whiteCup from "./assets/cup-white.png";
 import styles from "./donutnav.module.css";
 
-export default function DonutNav({ setProdType }) {
+export default function DonutNav({ handleClick }) {
   return (
     <div className={styles.navDiv}>
       <div className={styles.ddLogo}>
@@ -12,13 +12,13 @@ export default function DonutNav({ setProdType }) {
       </div>
 
       <div className={styles.productsDiv}>
-        <ProductTypes setProdType={setProdType} />
+        <ProductTypes handleClick={handleClick} />
       </div>
 
-      <div className={styles.botImagesDiv}>
+      {/* <div className={styles.botImagesDiv}>
         <img className={styles.pinkDonut} src={pinkDonut} />
         <img className={styles.whiteCup} src={whiteCup} />
-      </div>
+      </div> */}
     </div>
   );
 }

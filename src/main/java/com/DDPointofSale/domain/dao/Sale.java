@@ -31,11 +31,6 @@ public class Sale implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne()
-    @JoinColumn(name = "customer_id")
-    @JsonBackReference
-    private Customer customer;
-
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "emp_id")
     @JsonBackReference

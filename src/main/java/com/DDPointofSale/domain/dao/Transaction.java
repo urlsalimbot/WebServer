@@ -39,10 +39,10 @@ public class Transaction implements Serializable {
     private final Instant transactiondate = Instant.now().truncatedTo(ChronoUnit.SECONDS);
 
     @Enumerated(EnumType.STRING)
-    private Paytype paytype;
+    private Paytype paytype = Paytype.CASH;
 
     @Enumerated(EnumType.STRING)
-    private Purchasetype purchasetype;
+    private Purchasetype purchasetype = Purchasetype.ALACARTE;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference

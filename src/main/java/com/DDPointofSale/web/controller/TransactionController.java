@@ -1,14 +1,14 @@
 package com.DDPointofSale.web.controller;
 
+import com.DDPointofSale.domain.dao.Sale;
 import com.DDPointofSale.domain.dao.Transaction;
+import com.DDPointofSale.domain.dto.SaleDTO;
 import com.DDPointofSale.domain.dto.TransactionDTO;
 import com.DDPointofSale.domain.service.TransactionService;
 import io.javalin.http.Context;
-import io.javalin.validation.BodyValidator;
 import jakarta.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 
-import javax.xml.validation.Validator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +23,14 @@ public class TransactionController{
 
     public void getTransac(@NotNull Context context,@NotNull String id){
         try{
-            var transaction = transactionService.getbyID(Integer.parseInt(id));
-            if (transaction != null) {
-                context.json(Map.of("transaction", transaction)).status(200);
+            String[] myIds = id.split("-");
+
+            List<SaleDTO> sales = new ArrayList<>();
+            for (String string: myIds) {
+                sales.add(transactionService.getSalesbyProductID(Integer.parseInt(string)));
+            }
+            if (!sales.isEmpty()) {
+                context.json( sales).status(200);
             } else {
                 context.json(Map.of("error", "Transaction not found")).status(404);
             }
@@ -38,9 +43,9 @@ public class TransactionController{
 
     public void getAllTransac(@NotNull Context context){
         try{
-            List<Transaction> transaction = transactionService.getAll();
+            var transaction = transactionService.getAll();
             if(!transaction.isEmpty()){
-                context.json(Map.of("Transactions",transaction)).status(200);
+                context.json(transaction).status(200);
             }else {
                context.json(Map.of("error","Transactions are empty"))
                        .status(404);
@@ -53,15 +58,34 @@ public class TransactionController{
 
     }
 
-    public void saveTransac(@NotNull Context ctx) {
+    public void getAllSales(@NotNull Context context){
         try{
+            var transaction = transactionService.getAll();
+            if(!transaction.isEmpty()){
+                context.json(transaction).status(200);
+            }else {
+                context.json(Map.of("error","Transactions are empty"))
+                        .status(404);
+            }
+        }catch (Exception e){
+            context.json(Map.of("Error",e.getMessage()))
+                    .status(500);
+        }
+    }
+
+    public void getMoneyline(@NotNull Context context) {
+        var res = transactionService.getMoneyLine();
+        context.json(res).status(200);
+    }
+
+    public void saveTransac(@NotNull Context ctx) {
+//        try{
             var transac = ctx.bodyValidator(TransactionDTO.class)
                     .check(it -> !it.getSales().isEmpty(),"Sales list is empty")
-                    .check(it -> it.getPaytype() != null,"paytype is empty")
                     .check(it -> it.getTotal().floatValue() > 0.0, "total is empty or not valid")
-                    .check(it -> it.getPayment().floatValue() > 0.0, "payment is empty or not valid")
-                    .check(it -> it.getPurchasetype() != null,"purchasetype is empty");
+                    .check(it -> it.getPayment().floatValue() > 0.0, "payment is empty or not valid");
             if(transac.errors().isEmpty()){
+                System.out.println(transac.get().toString());
                 var appended = transac.get();
                 appended.setUsername(ctx.header("user"));
                 var res = transactionService.processTransac(appended);
@@ -72,9 +96,9 @@ public class TransactionController{
                 ctx.json(Map.of("error",transac.errors()))
                         .status(500);
             }
-        }catch (Exception e){
-            ctx.json(Map.of("error",e.getMessage()))
-                    .status(500);
-        }
+//        }catch (Exception e){
+//            ctx.json(Map.of("error",e.getMessage()))
+//                    .status(422);
+//        }
     }
 }

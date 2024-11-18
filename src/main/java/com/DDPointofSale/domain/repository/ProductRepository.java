@@ -3,10 +3,7 @@ package com.DDPointofSale.domain.repository;
 import com.DDPointofSale.Infrastructure.AppHibernate;
 import com.DDPointofSale.domain.dao.Product;
 import com.DDPointofSale.domain.dao.Product_;
-import com.DDPointofSale.domain.dao.User;
-import com.DDPointofSale.domain.dao.User_;
 import com.DDPointofSale.domain.repository.interfaces.IProductRepository;
-import com.DDPointofSale.security.userauth.UserAuth_;
 import jakarta.inject.Inject;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.criteria.CriteriaDefinition;
@@ -85,12 +82,18 @@ public class ProductRepository implements IProductRepository {
      */
     @Override
     public Optional<Product> updateProduct(Product product, String name) {
+        return Optional.empty();
+    }
+
+    /**
+     * @param product
+     * @param id
+     * @return
+     */
+    @Override
+    public Optional<Product> updatebyID(Product product, Integer id) {
        var res = sessionFactory.fromTransaction(session -> {
-           var query = new CriteriaDefinition<>(sessionFactory, Product.class) {{
-                var user = from(Product.class);
-                where(like(user.get(Product_.productname), name));
-            }};
-           var old = session.createQuery(query).getSingleResult();
+           var old = session.get(Product.class, id);
            product.setId(old.getId());
            session.merge(product);
            return product;

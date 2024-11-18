@@ -26,9 +26,12 @@ public class AuthenticationController {
                 .check(obj -> obj.getPassword() != null, "password is required");
         if(validator.errors().isEmpty()) {
             var userAuthDTO = validator.getOrThrow(ValidationException::new);
-            var token = authenticationService.authenticate(userAuthDTO);
-            JavalinJWT.addTokenToCookie(context,token.get());
-            context.json(Map.of("status", "success")).status(200);
+            var details = authenticationService.authenticate(userAuthDTO);
+            JavalinJWT.addTokenToCookie(context,details.get("TOKEN"));
+            System.out.println(details);
+            details.remove("TOKEN");
+            details.put("status","success");
+            context.json(details).status(201);
         }else{
             context.status(422).json(validator.errors());
         }

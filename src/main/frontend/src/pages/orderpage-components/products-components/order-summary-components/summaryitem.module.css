@@ -2,4 +2,72 @@
   height: 50px;
   border-radius: 3px;
   border: 3px solid rgb(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.summaryItemImg {
+  height: 45px;
+  width: 45px;
+}
+
+.summaryItemImg img {
+  height: 45px;
+  width: auto;
+  font-size: 12px;
+}
+
+.itemDetails {
+  text-align: start;
+}
+
+.summaryItemPrice {
+  color: rgb(0, 0, 0, 0.5);
+}
+
+.qtyContainer {
+  position: absolute;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summaryItemQty {
+  font-size: 24px;
+}
+
+.deleteBtnDiv {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  right: 0;
+  top: 0;
+}
+
+.deleteBtn {
+  font-size: 10px;
+  padding: 3px;
+  background-color: rgb(255, 0, 0, 0.5);
+  color: white;
+  border-radius: 3px;
+  border: none;
+}
+
+.deleteBtn:hover {
+  background-color: red;
+}
+
+.decrementBtn {
+  font-size: 20px;
+  padding: 3px;
+  width: 20px;
+  color: rgb(0, 0, 0, 0.5);
+  border-radius: 3px;
+  border: none;
 }

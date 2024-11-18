@@ -20,7 +20,7 @@ class AuthenticationControllerTest {
         Injector injector = Guice.createInjector(new ModuleConfig());
         AuthenticationController authcon = injector.getInstance(AuthenticationController.class);
 
-        System.out.println(AuthHandler.hashPassword("123456789"));
+        System.out.println(AuthHandler.hashPassword("12345"));
 
         UserAuth userAuth = UserAuth.builder()
                 .username("admin")

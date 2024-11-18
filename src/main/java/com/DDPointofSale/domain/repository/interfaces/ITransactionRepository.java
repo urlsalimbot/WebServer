@@ -1,5 +1,6 @@
 package com.DDPointofSale.domain.repository.interfaces;
 
+import com.DDPointofSale.domain.dao.Sale;
 import com.DDPointofSale.domain.dao.Transaction;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface ITransactionRepository {
     public Optional<Transaction> findById(int id);
 
     public List<Transaction> findAllTransactions();
+
+    public List<Sale> getsalesbyID(Integer id);
 }

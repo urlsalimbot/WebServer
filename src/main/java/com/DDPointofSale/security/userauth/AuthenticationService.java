@@ -7,6 +7,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import io.javalin.http.UnauthorizedResponse;
 import jakarta.inject.Inject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class AuthenticationService {
@@ -25,20 +27,24 @@ public class AuthenticationService {
         return myUser;
     }
 
-    public boolean validate(DecodedJWT token) {
+    public Map<String,String> validate(DecodedJWT token) {
         var user = token.getClaim("user").asString();
-        var pw = token.getClaim("passwordHash").asString();
-        var level = token.getClaim("level").asString();
+        var level = token.getClaim("role").asString();
 
-        return false;
+        return Map.of(user,level);
     }
 
-    public Optional<String> authenticate(UserAuthDTO userAuth) {
+    public Map<String,String> authenticate(UserAuthDTO userAuth) {
         UserAuth checkuser = authenticationRepository.getbyUsername(userAuth.getUsername());
         if (checkuser != null && AuthHandler.checkPassword(userAuth.getPassword(),checkuser.getPasswordHash())){
-            return getToken(checkuser).describeConstable();
+            var myUser = new HashMap<String,String>();
+            myUser.put("TOKEN",getToken(checkuser));
+            myUser.put("username",checkuser.getUsername());
+            myUser.put("role",checkuser.getRoles().toString());
+            System.out.println(myUser);
+            return myUser;
         } else {
-            throw new UnauthorizedResponse("Unauthorized");
+            throw new UnauthorizedResponse("Wrong Username or Password");
         }
     }
 

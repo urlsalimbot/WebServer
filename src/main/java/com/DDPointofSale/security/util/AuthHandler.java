@@ -45,4 +45,13 @@ public class AuthHandler {
     }
 
 
+    public static void append(@NotNull Context context) {
+        DecodedJWT jwt = JavalinJWT.getDecodedFromContext(context);
+        if(jwt!=null){
+            var user = jwt.getClaim("user").asString();
+            var role = jwt.getClaim("role").asString();
+            context.header("user", user);
+            context.header("role", role);
+        }
+    }
 }

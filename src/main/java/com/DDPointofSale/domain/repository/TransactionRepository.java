@@ -1,8 +1,7 @@
 package com.DDPointofSale.domain.repository;
 
 import com.DDPointofSale.Infrastructure.AppHibernate;
-import com.DDPointofSale.domain.dao.Transaction;
-import com.DDPointofSale.domain.dao.Transaction_;
+import com.DDPointofSale.domain.dao.*;
 import com.DDPointofSale.domain.repository.interfaces.ITransactionRepository;
 import jakarta.inject.Inject;
 import org.hibernate.SessionFactory;
@@ -30,6 +29,20 @@ public class TransactionRepository implements ITransactionRepository {
     });
         return res;
 
+    }
+
+    @Override
+    public List<Sale> getsalesbyID(Integer id) {
+        var res = sessionFactory.fromTransaction(session -> {
+            var query = new CriteriaDefinition<>(sessionFactory, Sale.class) {{
+                var user = from(Sale.class);
+                var join = user.join("product");
+                select(user);
+                where(equal(join.get(Product_.ID), id));
+            }};
+            return session.createQuery(query).getResultList();
+        });
+        return res;
     }
 
     /**

@@ -20,6 +20,9 @@ export default function LoginForm() {
       console.log("executed");
     }
     //UNTIL THIS LINE
+
+    setUsername("");
+    setPassword("");
   }
 
   return (

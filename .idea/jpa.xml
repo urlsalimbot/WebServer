@@ -5,4 +5,7 @@
     <option name="reLastEntityCreationPackage" value="src/main/java/com/WebServTest/domain" />
     <option name="reverseEngineeringLastDbConnectionId" value="177576be-76ae-4568-8f92-911a97b7209d" />
   </component>
+  <component name="JpaPluginProjectSettings">
+    <option name="lastSelectedLanguage" value="Java" />
+  </component>
 </project>

@@ -15,6 +15,11 @@
 .processBtnDiv {
   width: 100%;
   height: 50px;
+  display: flex;
+}
+
+.processBtnDiv button {
+  flex: 1 1 auto;
 }
 
 .processBtn {
@@ -23,8 +28,26 @@
   border: none;
   width: 100%;
   height: 100%;
-  border-radius: 5px;
   margin-top: 3px;
   font-size: 28px;
   font-family: "Caprasimo", serif;
+}
+
+.processBtn:hover {
+  background-color: #f40290;
+}
+
+.cancelBtn {
+  background-color: crimson;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 100%;
+  margin-top: 3px;
+  font-size: 28px;
+  font-family: "Caprasimo", serif;
+}
+
+.cancelBtn:hover {
+  background-color: #f40290;
 }
